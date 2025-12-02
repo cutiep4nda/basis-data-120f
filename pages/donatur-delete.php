@@ -1,11 +1,6 @@
 <?php
-session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: ../index.php");
-    exit;
-}
 
-require '../function.php';
+require '../config/db.php';
 
 $id = $_GET['id'];
 

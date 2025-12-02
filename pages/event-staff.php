@@ -1,10 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: ../index.php");
-    exit;
-}
-
 require '../function.php';
 include '../templates/header.php';
 include '../templates/sidebar.php';
@@ -78,11 +72,8 @@ if (isset($_POST['submit'])) {
 
         <?php while ($row = pg_fetch_assoc($staff)): ?>
             <div class="form-check">
-                <input type="checkbox"
-                       class="form-check-input"
-                       name="staff[]"
-                       value="<?= $row['id'] ?>"
-                       <?= in_array($row['id'], $assigned_ids) ? "checked" : "" ?>>
+                <input type="checkbox" class="form-check-input" name="staff[]" value="<?= $row['id'] ?>"
+                    <?= in_array($row['id'], $assigned_ids) ? "checked" : "" ?>>
 
                 <label class="form-check-label">
                     <?= $row['nama'] ?> — <?= $row['instansi'] ?>

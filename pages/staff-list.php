@@ -1,10 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: ../index.php");
-    exit;
-}
-
 require '../function.php';
 include '../templates/header.php';
 include '../templates/sidebar.php';
@@ -18,9 +12,8 @@ $search = isset($_GET['search']) ? trim($_GET['search']) : "";
 
     <!-- FORM SEARCH -->
     <form method="GET" class="mb-3 d-flex" style="max-width: 400px;">
-        <input type="text" name="search" class="form-control me-2"
-               placeholder="Cari nama, instansi, MBTI..."
-               value="<?= htmlspecialchars($search); ?>">
+        <input type="text" name="search" class="form-control me-2" placeholder="Cari nama, instansi, MBTI..."
+            value="<?= htmlspecialchars($search); ?>">
         <button class="btn btn-primary"><i class="bi bi-search"></i></button>
     </form>
 
@@ -70,8 +63,8 @@ $search = isset($_GET['search']) ? trim($_GET['search']) : "";
             }
 
             $no = 1;
-            while ($row = pg_fetch_assoc($query)) :
-            ?>
+            while ($row = pg_fetch_assoc($query)):
+                ?>
                 <tr>
                     <td><?= $no++; ?></td>
                     <td><?= $row['nama']; ?></td>
@@ -86,8 +79,8 @@ $search = isset($_GET['search']) ? trim($_GET['search']) : "";
                         <a href="staff-edit.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
 
                         <a href="staff-delete.php?id=<?= $row['id']; ?>"
-                           onclick="return confirm('Yakin ingin menghapus staff ini?');"
-                           class="btn btn-danger btn-sm">Hapus</a>
+                            onclick="return confirm('Yakin ingin menghapus staff ini?');"
+                            class="btn btn-danger btn-sm">Hapus</a>
                     </td>
                 </tr>
 

@@ -1,9 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: ../index.php");
-    exit;
-}
 
 require '../function.php';
 include '../templates/header.php';
@@ -13,20 +8,20 @@ $id = $_GET['id'];
 
 // Ambil data staff berdasarkan ID
 $query = pg_query_params($koneksi, "SELECT * FROM staff WHERE id = $1", [$id]);
-$data  = pg_fetch_assoc($query);
+$data = pg_fetch_assoc($query);
 
 $success = "";
 $error = "";
 
 if (isset($_POST['submit'])) {
 
-    $nama          = $_POST['nama'];
-    $tempat_lahir  = $_POST['tempat_lahir'];
+    $nama = $_POST['nama'];
+    $tempat_lahir = $_POST['tempat_lahir'];
     $tanggal_lahir = $_POST['tanggal_lahir'];
-    $mbti          = $_POST['mbti'];
-    $instansi      = $_POST['instansi'];
-    $id_cabang     = $_POST['id_cabang'];
-    $id_divisi     = $_POST['id_divisi'];
+    $mbti = $_POST['mbti'];
+    $instansi = $_POST['instansi'];
+    $id_cabang = $_POST['id_cabang'];
+    $id_divisi = $_POST['id_divisi'];
 
     $update = "
         UPDATE staff 
@@ -35,7 +30,14 @@ if (isset($_POST['submit'])) {
     ";
 
     $result = pg_query_params($koneksi, $update, [
-        $nama, $tempat_lahir, $tanggal_lahir, $mbti, $instansi, $id_cabang, $id_divisi, $id
+        $nama,
+        $tempat_lahir,
+        $tanggal_lahir,
+        $mbti,
+        $instansi,
+        $id_cabang,
+        $id_divisi,
+        $id
     ]);
 
     if ($result) {
@@ -97,10 +99,9 @@ if (isset($_POST['submit'])) {
             <select name="id_cabang" class="form-control" required>
                 <?php
                 $cb = pg_query($koneksi, "SELECT * FROM cabang ORDER BY cabang ASC");
-                while ($c = pg_fetch_assoc($cb)) :
-                ?>
-                    <option value="<?= $c['id']; ?>"
-                        <?= $c['id'] == $data['id_cabang'] ? 'selected' : '' ?>>
+                while ($c = pg_fetch_assoc($cb)):
+                    ?>
+                    <option value="<?= $c['id']; ?>" <?= $c['id'] == $data['id_cabang'] ? 'selected' : '' ?>>
                         <?= $c['cabang']; ?>
                     </option>
                 <?php endwhile; ?>
@@ -113,10 +114,9 @@ if (isset($_POST['submit'])) {
             <select name="id_divisi" class="form-control" required>
                 <?php
                 $dv = pg_query($koneksi, "SELECT * FROM divisi ORDER BY di_name ASC");
-                while ($d = pg_fetch_assoc($dv)) :
-                ?>
-                    <option value="<?= $d['id']; ?>"
-                        <?= $d['id'] == $data['id_divisi'] ? 'selected' : '' ?>>
+                while ($d = pg_fetch_assoc($dv)):
+                    ?>
+                    <option value="<?= $d['id']; ?>" <?= $d['id'] == $data['id_divisi'] ? 'selected' : '' ?>>
                         <?= $d['di_name']; ?>
                     </option>
                 <?php endwhile; ?>

@@ -25,10 +25,10 @@ if (!isset($_SESSION)) {
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="/assets/css/style.css?v=<?php echo time(); ?>">
 
-    
+
 
 </head>
 
 <body>
 
-<div class="d-flex" id="wrapper">
+    <div class="d-flex" id="wrapper">

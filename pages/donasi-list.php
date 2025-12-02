@@ -1,11 +1,6 @@
 <?php
-session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: ../index.php");
-    exit;
-}
 
-require '../function.php';
+require '../config/db.php';
 include '../templates/header.php';
 include '../templates/sidebar.php';
 ?>
@@ -25,7 +20,6 @@ include '../templates/sidebar.php';
                 <th>Donatur</th>
                 <th>Jenis</th>
                 <th>Keterangan/Jumlah</th>
-                <th>Nominal (Rp)</th>
                 <th>Tanggal</th>
                 <th>Aksi</th>
             </tr>
@@ -49,7 +43,7 @@ include '../templates/sidebar.php';
             ");
 
             $no = 1;
-            while ($row = pg_fetch_assoc($query)) :
+            while ($row = pg_fetch_assoc($query)):
 
                 // menentukan jenis donasi
                 if ($row['nominal'] !== null) {
@@ -57,7 +51,7 @@ include '../templates/sidebar.php';
                 } else {
                     $jenis = "Barang";
                 }
-            ?>
+                ?>
                 <tr>
                     <td><?= $no++; ?></td>
                     <td><?= $row['nama']; ?></td>
@@ -65,14 +59,8 @@ include '../templates/sidebar.php';
 
                     <td>
                         <?php if ($jenis == "Barang"): ?>
-                            <?= $row['keterangan']; ?> (<?= $row['kuantitas']; ?> pcs)
-                        <?php else: ?>
-                            -
-                        <?php endif; ?>
-                    </td>
-
-                    <td>
-                        <?php if ($jenis == "Uang"): ?>
+                            <?= $row['keterangan']; ?> (<?= $row['kuantitas']; ?> satuan)
+                        <?php elseif ($jenis == "Uang"): ?>
                             Rp <?= number_format($row['nominal'], 0, ',', '.'); ?>
                         <?php else: ?>
                             -
@@ -83,10 +71,9 @@ include '../templates/sidebar.php';
 
                     <td>
                         <a href="donasi-edit.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="donasi-delete.php?id=<?= $row['id']; ?>"
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('Yakin menghapus donasi ini?')">
-                           Hapus
+                        <a href="donasi-delete.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Yakin menghapus donasi ini?')">
+                            Hapus
                         </a>
                     </td>
                 </tr>
@@ -97,5 +84,6 @@ include '../templates/sidebar.php';
     </table>
 
 </div>
+
 
 <?php include '../templates/footer.php'; ?>

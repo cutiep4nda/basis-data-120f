@@ -1,9 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: ../index.php");
-    exit;
-}
 
 require '../function.php';
 include '../templates/header.php';
@@ -18,13 +13,13 @@ $divisiQuery = pg_query($koneksi, "SELECT * FROM divisi ORDER BY di_name ASC");
 
 if (isset($_POST['submit'])) {
 
-    $nama          = $_POST['nama'];
-    $tempat_lahir  = $_POST['tempat_lahir'];
+    $nama = $_POST['nama'];
+    $tempat_lahir = $_POST['tempat_lahir'];
     $tanggal_lahir = $_POST['tanggal_lahir'];
-    $mbti          = $_POST['mbti'];
-    $instansi      = $_POST['instansi'];
-    $id_cabang     = $_POST['id_cabang'];
-    $id_divisi     = $_POST['id_divisi'];
+    $mbti = $_POST['mbti'];
+    $instansi = $_POST['instansi'];
+    $id_cabang = $_POST['id_cabang'];
+    $id_divisi = $_POST['id_divisi'];
 
     $query = "
         INSERT INTO staff 
@@ -33,8 +28,13 @@ if (isset($_POST['submit'])) {
     ";
 
     $result = pg_query_params($koneksi, $query, [
-        $nama, $tempat_lahir, $tanggal_lahir, $mbti, $instansi,
-        $id_cabang, $id_divisi
+        $nama,
+        $tempat_lahir,
+        $tanggal_lahir,
+        $mbti,
+        $instansi,
+        $id_cabang,
+        $id_divisi
     ]);
 
     if ($result) {
@@ -88,7 +88,7 @@ if (isset($_POST['submit'])) {
             <label class="form-label">Cabang</label>
             <select name="id_cabang" class="form-control" required>
                 <option value="">-- Pilih Cabang --</option>
-                <?php while ($c = pg_fetch_assoc($cabangQuery)) : ?>
+                <?php while ($c = pg_fetch_assoc($cabangQuery)): ?>
                     <option value="<?= $c['id']; ?>"><?= $c['cabang']; ?></option>
                 <?php endwhile; ?>
             </select>
@@ -98,7 +98,7 @@ if (isset($_POST['submit'])) {
             <label class="form-label">Divisi</label>
             <select name="id_divisi" class="form-control" required>
                 <option value="">-- Pilih Divisi --</option>
-                <?php while ($d = pg_fetch_assoc($divisiQuery)) : ?>
+                <?php while ($d = pg_fetch_assoc($divisiQuery)): ?>
                     <option value="<?= $d['id']; ?>"><?= $d['di_name']; ?></option>
                 <?php endwhile; ?>
             </select>

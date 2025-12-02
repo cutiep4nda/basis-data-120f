@@ -1,10 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: ../index.php");
-    exit;
-}
-
 require '../function.php';
 include '../templates/header.php';
 include '../templates/sidebar.php';
@@ -34,16 +28,20 @@ $error = "";
 if (isset($_POST['submit'])) {
 
     $tema_event = $_POST['tema_event'];
-    $id_tempat  = $_POST['id_tempat'];
+    $id_tempat = $_POST['id_tempat'];
 
     $update = "UPDATE event SET tema_event = $1, id_tempat = $2 WHERE id = $3";
 
     $res = pg_query_params($koneksi, $update, [
-        $tema_event, $id_tempat, $id
+        $tema_event,
+        $id_tempat,
+        $id
     ]);
 
-    if ($res) $success = "Event berhasil diupdate!";
-    else $error = "Gagal update event!";
+    if ($res)
+        $success = "Event berhasil diupdate!";
+    else
+        $error = "Gagal update event!";
 }
 ?>
 
@@ -63,16 +61,14 @@ if (isset($_POST['submit'])) {
 
         <div class="mb-3">
             <label class="form-label">Tema Event</label>
-            <input type="text" name="tema_event" class="form-control" 
-                   value="<?= $data['tema_event'] ?>" required>
+            <input type="text" name="tema_event" class="form-control" value="<?= $data['tema_event'] ?>" required>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Tempat</label>
             <select name="id_tempat" class="form-control" required>
                 <?php while ($t = pg_fetch_assoc($tempat)): ?>
-                    <option value="<?= $t['id'] ?>"
-                        <?= ($t['id'] == $data['id_tempat']) ? 'selected' : '' ?>>
+                    <option value="<?= $t['id'] ?>" <?= ($t['id'] == $data['id_tempat']) ? 'selected' : '' ?>>
                         Tempat ID: <?= $t['id'] ?>
                     </option>
                 <?php endwhile; ?>
