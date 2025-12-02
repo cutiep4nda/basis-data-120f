@@ -1,6 +1,6 @@
 <?php
 
-require '../function.php';
+require '../config/db.php';
 include '../templates/header.php';
 include '../templates/sidebar.php';
 

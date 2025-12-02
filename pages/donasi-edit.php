@@ -1,12 +1,11 @@
 <?php
 
-require '../function.php';
+require '../config/db.php';
 include '../templates/header.php';
 include '../templates/sidebar.php';
 
 $id = $_GET['id'];
 
-// Ambil data donasi utama
 $donasi = pg_query_params(
     $koneksi,
     "SELECT * FROM donasi WHERE id = $1",
@@ -14,7 +13,6 @@ $donasi = pg_query_params(
 );
 $data = pg_fetch_assoc($donasi);
 
-// Cek apakah donasi uang
 $q_uang = pg_query_params(
     $koneksi,
     "SELECT * FROM donasi_uang WHERE id_donasi = $1",
@@ -22,7 +20,6 @@ $q_uang = pg_query_params(
 );
 $data_uang = pg_fetch_assoc($q_uang);
 
-// Cek apakah donasi barang
 $q_barang = pg_query_params(
     $koneksi,
     "SELECT * FROM donasi_barang WHERE id_donasi = $1",
@@ -30,7 +27,6 @@ $q_barang = pg_query_params(
 );
 $data_barang = pg_fetch_assoc($q_barang);
 
-// Tentukan jenis donasi
 $jenis = "uang";
 if ($data_barang)
     $jenis = "barang";
@@ -44,7 +40,6 @@ if (isset($_POST['submit'])) {
     $tanggal = $_POST['tanggal'];
     $jenis_baru = $_POST['jenis'];
 
-    // Update tabel donasi
     pg_query_params(
         $koneksi,
         "UPDATE donasi SET id_donatur = $1, tanggal = $2 WHERE id = $3",

@@ -2,10 +2,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-session_start();
-
-require 'function.php';
-
 $error = "";
 
 if (isset($_SESSION["login"])) {
@@ -14,32 +10,13 @@ if (isset($_SESSION["login"])) {
 }
 
 if (isset($_POST['submit'])) {
-
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
-
-    $query = "SELECT * FROM users WHERE username = $1";
-    $result = pg_query_params($koneksi, $query, [$username]);
-
-    if (pg_num_rows($result) === 1) {
-        $row = pg_fetch_assoc($result);
-
-        if (password_verify($password, $row['password'])) {
-
-            $_SESSION['login'] = true;
-            $_SESSION['id_user'] = $row['id_user'];
-            $_SESSION['username'] = $row['username'];
-
-            header("Location: dashboard.php");
-            exit;
-
-        } else {
-            $error = "Password salah!";
-        }
-
+    if ($_POST['username'] == 'admin' && $_POST['password'] == 'admin') {
+        header("Location: dashboard.php");
+        exit;
     } else {
-        $error = "Username tidak terdaftar!";
+        $error = "Kredensial salah! Silahkan coba lagi!";
     }
+
 }
 ?>
 

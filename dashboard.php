@@ -1,5 +1,5 @@
 <?php
-require 'function.php';
+require 'config/db.php';
 include 'templates/header.php';
 include 'templates/sidebar.php';
 ?>
@@ -251,7 +251,7 @@ include 'templates/sidebar.php';
                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%232240c7%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2240%22 fill=%22white%22%3E🏠%3C/text%3E%3C/svg%3E'">
             <div class="header-content">
                 <h1>Dashboard Admin Komunitas Panti Goceng</h1>
-                <p class="welcome-text">Selamat datang, <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
+                <p class="welcome-text">Selamat datang, Admin!</p>
                 <p>
                     Dirancang oleh lima mahasiswa Ilmu Komputer sebagai Tugas Proyek Mata Kuliah Basis Data untuk
                     memudahkan manajemen data komunitas Panti Goceng.

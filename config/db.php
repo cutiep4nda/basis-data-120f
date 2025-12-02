@@ -4,9 +4,9 @@ ini_set('display_errors', 1);
 
 $host = "localhost";
 $port = "5432";
-$dbname = "pgc2_database";
+$dbname = "pgc_database";
 $user = "postgres";
-$password = "admin";
+$password = "root";
 
 $koneksi = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
 

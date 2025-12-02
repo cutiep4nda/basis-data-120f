@@ -108,10 +108,14 @@
     ?>
 </style>
 
+<?php
+$root_dir = "/p4";
+?>
+
 <div id="sidebar">
 
     <div class="sidebar-logo">
-        <img src="/proyek-basdat/assets/logo_pgc.png" alt="Logo Panti Goceng"
+        <img src="<?= $root_dir ?>/assets/logo_pgc.png" alt="Logo Panti Goceng"
             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23667eea%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2250%22%3E🏠%3C/text%3E%3C/svg%3E'">
         <h3>Panti Goceng</h3>
         <p>Admin Panel</p>
@@ -121,7 +125,7 @@
         <ul class="list-unstyled">
 
             <li class="nav-item">
-                <a href="/proyek-basdat/dashboard.php"
+                <a href="<?= $root_dir ?>/dashboard.php"
                     class="nav-link <?= ($current_page == 'dashboard.php') ? 'active' : '' ?>">
                     <iconify-icon icon="mdi:view-dashboard"></iconify-icon>
                     Dashboard
@@ -129,7 +133,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="/proyek-basdat/pages/donatur-list.php"
+                <a href="<?= $root_dir ?>/pages/donatur-list.php"
                     class="nav-link <?= ($current_page == 'donatur-list.php') ? 'active' : '' ?>">
                     <iconify-icon icon="mdi:account-heart"></iconify-icon>
                     Data Donatur
@@ -137,7 +141,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="/proyek-basdat/pages/donasi-list.php"
+                <a href="<?= $root_dir ?>/pages/donasi-list.php"
                     class="nav-link <?= ($current_page == 'donasi-list.php') ? 'active' : '' ?>">
                     <iconify-icon icon="mdi:hand-coin"></iconify-icon>
                     Data Donasi
@@ -145,7 +149,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="/proyek-basdat/pages/staff-list.php"
+                <a href="<?= $root_dir ?>/pages/staff-list.php"
                     class="nav-link <?= ($current_page == 'staff-list.php') ? 'active' : '' ?>">
                     <iconify-icon icon="mdi:account-tie-hat"></iconify-icon>
                     Data Staff
@@ -153,7 +157,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="/proyek-basdat/pages/event-list.php"
+                <a href="<?= $root_dir ?>/pages/event-list.php"
                     class="nav-link <?= ($current_page == 'event-list.php') ? 'active' : '' ?>">
                     <iconify-icon icon="mdi:calendar-heart"></iconify-icon>
                     Data Event

@@ -1,6 +1,6 @@
 <?php
 
-require '../function.php';
+require '../config/db.php';
 include '../templates/header.php';
 include '../templates/sidebar.php';
 ?>
@@ -20,7 +20,6 @@ include '../templates/sidebar.php';
                 <th>Donatur</th>
                 <th>Jenis</th>
                 <th>Keterangan/Jumlah</th>
-                <th>Nominal (Rp)</th>
                 <th>Tanggal</th>
                 <th>Aksi</th>
             </tr>
@@ -60,14 +59,8 @@ include '../templates/sidebar.php';
 
                     <td>
                         <?php if ($jenis == "Barang"): ?>
-                            <?= $row['keterangan']; ?> (<?= $row['kuantitas']; ?> pcs)
-                        <?php else: ?>
-                            -
-                        <?php endif; ?>
-                    </td>
-
-                    <td>
-                        <?php if ($jenis == "Uang"): ?>
+                            <?= $row['keterangan']; ?> (<?= $row['kuantitas']; ?> satuan)
+                        <?php elseif ($jenis == "Uang"): ?>
                             Rp <?= number_format($row['nominal'], 0, ',', '.'); ?>
                         <?php else: ?>
                             -
@@ -91,5 +84,6 @@ include '../templates/sidebar.php';
     </table>
 
 </div>
+
 
 <?php include '../templates/footer.php'; ?>
