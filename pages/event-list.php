@@ -1,9 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: ../index.php");
-    exit;
-}
 
 require '../function.php';
 include '../templates/header.php';
@@ -58,8 +53,8 @@ $query = pg_query($koneksi, $sql);
     <!-- SEARCH BAR -->
     <form method="GET" class="mb-3">
         <div class="input-group">
-            <input type="text" name="search" placeholder="Cari tema event atau cabang..." 
-                   value="<?= $keyword ?>" class="form-control">
+            <input type="text" name="search" placeholder="Cari tema event atau cabang..." value="<?= $keyword ?>"
+                class="form-control">
             <button class="btn btn-dark" type="submit">Cari</button>
         </div>
     </form>
@@ -75,10 +70,10 @@ $query = pg_query($koneksi, $sql);
         </thead>
 
         <tbody>
-            <?php 
+            <?php
             $no = 1;
-            while ($row = pg_fetch_assoc($query)): 
-            ?>
+            while ($row = pg_fetch_assoc($query)):
+                ?>
                 <tr>
                     <td><?= $no++ ?></td>
                     <td><?= $row['tema_event'] ?></td>
@@ -91,10 +86,9 @@ $query = pg_query($koneksi, $sql);
                         <a href="event-staff.php?id=<?= $row['id'] ?>" class="btn btn-secondary btn-sm">Staff</a>
                         <a href="event-edit.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
 
-                        <a href="event-delete.php?id=<?= $row['id'] ?>" 
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('Yakin menghapus event?')">
-                           Hapus
+                        <a href="event-delete.php?id=<?= $row['id'] ?>" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Yakin menghapus event?')">
+                            Hapus
                         </a>
                     </td>
                 </tr>

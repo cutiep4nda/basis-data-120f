@@ -45,6 +45,7 @@ if (isset($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login - Panti Goceng</title>
@@ -53,50 +54,44 @@ if (isset($_POST['submit'])) {
 
 <body class="bg-light">
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-4">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
 
-            <div class="card shadow">
-                <div class="card-body">
+                <div class="card shadow">
+                    <div class="card-body">
 
-                    <h3 class="text-center mb-4">Login Admin</h3>
+                        <h3 class="text-center mb-4">Login Admin</h3>
 
-                    <?php if ($error): ?>
-                        <div class="alert alert-danger"><?= $error ?></div>
-                    <?php endif; ?>
+                        <?php if ($error): ?>
+                            <div class="alert alert-danger"><?= $error ?></div>
+                        <?php endif; ?>
 
-                    <form action="" method="POST">
+                        <form action="" method="POST">
 
-                        <div class="mb-3">
-                            <label class="form-label">Username</label>
-                            <input type="text"
-                                   name="username"
-                                   class="form-control"
-                                   required>
-                        </div>
+                            <div class="mb-3">
+                                <label class="form-label">Username</label>
+                                <input type="text" name="username" class="form-control" required>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password"
-                                   name="password"
-                                   class="form-control"
-                                   required>
-                        </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" required>
+                            </div>
 
-                        <button type="submit" name="submit"
-                                class="btn btn-primary w-100">
-                            Login
-                        </button>
+                            <button type="submit" name="submit" class="btn btn-primary w-100">
+                                Login
+                            </button>
 
-                    </form>
+                        </form>
 
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
 
 </body>
+
 </html>

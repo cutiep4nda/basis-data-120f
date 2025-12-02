@@ -1,9 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: ../index.php");
-    exit;
-}
 
 require '../function.php';
 include '../templates/header.php';
@@ -49,7 +44,7 @@ include '../templates/sidebar.php';
             ");
 
             $no = 1;
-            while ($row = pg_fetch_assoc($query)) :
+            while ($row = pg_fetch_assoc($query)):
 
                 // menentukan jenis donasi
                 if ($row['nominal'] !== null) {
@@ -57,7 +52,7 @@ include '../templates/sidebar.php';
                 } else {
                     $jenis = "Barang";
                 }
-            ?>
+                ?>
                 <tr>
                     <td><?= $no++; ?></td>
                     <td><?= $row['nama']; ?></td>
@@ -83,10 +78,9 @@ include '../templates/sidebar.php';
 
                     <td>
                         <a href="donasi-edit.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="donasi-delete.php?id=<?= $row['id']; ?>"
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('Yakin menghapus donasi ini?')">
-                           Hapus
+                        <a href="donasi-delete.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Yakin menghapus donasi ini?')">
+                            Hapus
                         </a>
                     </td>
                 </tr>

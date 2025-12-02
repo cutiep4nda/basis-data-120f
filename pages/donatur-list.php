@@ -1,9 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: ../index.php");
-    exit;
-}
 
 require '../function.php';
 include '../templates/header.php';
@@ -32,8 +27,8 @@ include '../templates/sidebar.php';
             $query = pg_query($koneksi, "SELECT * FROM donatur ORDER BY id DESC");
             $no = 1;
 
-            while ($row = pg_fetch_assoc($query)) :
-            ?>
+            while ($row = pg_fetch_assoc($query)):
+                ?>
                 <tr>
                     <td><?= $no++; ?></td>
                     <td><?= $row['nama']; ?></td>
@@ -44,9 +39,8 @@ include '../templates/sidebar.php';
                         </a>
 
                         <a href="donatur-delete.php?id=<?= $row['id']; ?>"
-                           onclick="return confirm('Yakin ingin menghapus donatur ini?');"
-                           class="btn btn-danger btn-sm">
-                           Hapus
+                            onclick="return confirm('Yakin ingin menghapus donatur ini?');" class="btn btn-danger btn-sm">
+                            Hapus
                         </a>
                     </td>
                 </tr>

@@ -1,9 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: ../index.php");
-    exit;
-}
 
 require '../function.php';
 include '../templates/header.php';
@@ -31,11 +26,11 @@ if (isset($_POST['submit'])) {
 <div class="container mt-4">
     <h3>Tambah Donatur</h3>
 
-    <?php if ($success) : ?>
+    <?php if ($success): ?>
         <div class="alert alert-success"><?= $success ?></div>
     <?php endif; ?>
 
-    <?php if ($error) : ?>
+    <?php if ($error): ?>
         <div class="alert alert-danger"><?= $error ?></div>
     <?php endif; ?>
 

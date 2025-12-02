@@ -1,9 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: ../index.php");
-    exit;
-}
 
 require '../function.php';
 include '../templates/header.php';
@@ -15,19 +10,24 @@ $error = "";
 if (isset($_POST['submit'])) {
 
     $nama_event = $_POST['nama_event'];
-    $tanggal    = $_POST['tanggal'];
-    $lokasi     = $_POST['lokasi'];
-    $deskripsi  = $_POST['deskripsi'];
+    $tanggal = $_POST['tanggal'];
+    $lokasi = $_POST['lokasi'];
+    $deskripsi = $_POST['deskripsi'];
 
     $query = "INSERT INTO event (nama_event, tanggal, lokasi, deskripsi)
               VALUES ($1, $2, $3, $4)";
 
     $result = pg_query_params($koneksi, $query, [
-        $nama_event, $tanggal, $lokasi, $deskripsi
+        $nama_event,
+        $tanggal,
+        $lokasi,
+        $deskripsi
     ]);
 
-    if ($result) $success = "Event berhasil ditambahkan!";
-    else $error = "Gagal menambah event!";
+    if ($result)
+        $success = "Event berhasil ditambahkan!";
+    else
+        $error = "Gagal menambah event!";
 }
 
 ?>

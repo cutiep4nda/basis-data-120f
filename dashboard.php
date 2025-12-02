@@ -1,10 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION["login"])) {
-    header("Location: index.php");
-    exit;
-}
-
 require 'function.php';
 include 'templates/header.php';
 include 'templates/sidebar.php';
@@ -12,6 +6,7 @@ include 'templates/sidebar.php';
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -210,6 +205,7 @@ include 'templates/sidebar.php';
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -221,29 +217,49 @@ include 'templates/sidebar.php';
             opacity: 0;
         }
 
-        .stat-card:nth-child(1) { animation-delay: 0.1s; }
-        .stat-card:nth-child(2) { animation-delay: 0.2s; }
-        .stat-card:nth-child(3) { animation-delay: 0.3s; }
-        .stat-card:nth-child(4) { animation-delay: 0.4s; }
-        .stat-card:nth-child(5) { animation-delay: 0.5s; }
-        .stat-card:nth-child(6) { animation-delay: 0.6s; }
+        .stat-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .stat-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .stat-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .stat-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .stat-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .stat-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
     </style>
 </head>
+
 <body>
     <div class="main-content">
         <!-- Dashboard Header -->
         <div class="dashboard-header">
-            <img src="assets/logo_pgc.png" alt="Logo Panti Goceng" class="header-logo" 
-                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%232240c7%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2240%22 fill=%22white%22%3E🏠%3C/text%3E%3C/svg%3E'">
+            <img src="assets/logo_pgc.png" alt="Logo Panti Goceng" class="header-logo"
+                onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%232240c7%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2240%22 fill=%22white%22%3E🏠%3C/text%3E%3C/svg%3E'">
             <div class="header-content">
                 <h1>Dashboard Admin Komunitas Panti Goceng</h1>
                 <p class="welcome-text">Selamat datang, <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
                 <p>
-                    Dirancang oleh lima mahasiswa Ilmu Komputer sebagai Tugas Proyek Mata Kuliah Basis Data untuk memudahkan manajemen data komunitas Panti Goceng. 
-                    Panti Goceng adalah komunitas peduli anak yatim yang berkomitmen memberikan kasih sayang, 
-                    pendidikan, dan kehidupan yang layak bagi anak-anak panti asuhan melalui program donasi dan kegiatan sosial.
+                    Dirancang oleh lima mahasiswa Ilmu Komputer sebagai Tugas Proyek Mata Kuliah Basis Data untuk
+                    memudahkan manajemen data komunitas Panti Goceng.
+                    Panti Goceng adalah komunitas peduli anak yatim yang berkomitmen memberikan kasih sayang,
+                    pendidikan, dan kehidupan yang layak bagi anak-anak panti asuhan melalui program donasi dan kegiatan
+                    sosial.
                 </p>
-                
+
             </div>
         </div>
 
@@ -259,7 +275,7 @@ include 'templates/sidebar.php';
                 <div class="stat-body">
                     <h3>Total Cabang</h3>
                     <div class="stat-value">
-                        <?php 
+                        <?php
                         $q = pg_query($koneksi, "SELECT COUNT(*) FROM cabang");
                         echo number_format(pg_fetch_result($q, 0, 0));
                         ?>
@@ -277,7 +293,7 @@ include 'templates/sidebar.php';
                 <div class="stat-body">
                     <h3>Total Donatur</h3>
                     <div class="stat-value">
-                        <?php 
+                        <?php
                         $q = pg_query($koneksi, "SELECT COUNT(*) FROM donatur");
                         echo number_format(pg_fetch_result($q, 0, 0));
                         ?>
@@ -295,7 +311,7 @@ include 'templates/sidebar.php';
                 <div class="stat-body">
                     <h3>Total Donasi</h3>
                     <div class="stat-value">
-                        <?php 
+                        <?php
                         $q = pg_query($koneksi, "SELECT COUNT(*) FROM donasi");
                         echo number_format(pg_fetch_result($q, 0, 0));
                         ?>
@@ -313,7 +329,7 @@ include 'templates/sidebar.php';
                 <div class="stat-body">
                     <h3>Total Donasi Uang</h3>
                     <div class="stat-value currency">
-                        <small>Rp</small> <?php 
+                        <small>Rp</small> <?php
                         $q = pg_query($koneksi, "SELECT COALESCE(SUM(nominal),0) FROM donasi_uang");
                         echo number_format(pg_fetch_result($q, 0, 0), 0, ',', '.');
                         ?>
@@ -331,7 +347,7 @@ include 'templates/sidebar.php';
                 <div class="stat-body">
                     <h3>Total Staff</h3>
                     <div class="stat-value">
-                        <?php 
+                        <?php
                         $q = pg_query($koneksi, "SELECT COUNT(*) FROM staff");
                         echo number_format(pg_fetch_result($q, 0, 0));
                         ?>
@@ -349,7 +365,7 @@ include 'templates/sidebar.php';
                 <div class="stat-body">
                     <h3>Total Event</h3>
                     <div class="stat-value">
-                        <?php 
+                        <?php
                         $q = pg_query($koneksi, "SELECT COUNT(*) FROM event");
                         echo number_format(pg_fetch_result($q, 0, 0));
                         ?>
@@ -361,4 +377,5 @@ include 'templates/sidebar.php';
 
     <?php include 'templates/footer.php'; ?>
 </body>
+
 </html>
