@@ -1,7 +1,7 @@
 <?php
-require '../function.php';
-include '../templates/header.php';
-include '../templates/sidebar.php';
+require '../../config/db.php';
+include '../../templates/header.php';
+include '../../templates/sidebar.php';
 
 // Ambil keyword pencarian
 $search = isset($_GET['search']) ? trim($_GET['search']) : "";
@@ -38,7 +38,7 @@ $search = isset($_GET['search']) ? trim($_GET['search']) : "";
 
         <tbody>
             <?php
-            // Jika search kosong → tampilkan semua
+            // Jika search kosong -> tampilkan semua
             if ($search == "") {
                 $query = pg_query($koneksi, "
                     SELECT s.*, c.cabang, d.di_name AS divisi
@@ -48,7 +48,7 @@ $search = isset($_GET['search']) ? trim($_GET['search']) : "";
                     ORDER BY s.id DESC
                 ");
             } else {
-                // Search → LIKE case-insensitive
+                // Search -> LIKE case-insensitive
                 $query = pg_query_params($koneksi, "
                     SELECT s.*, c.cabang, d.di_name AS divisi
                     FROM staff s
@@ -89,4 +89,4 @@ $search = isset($_GET['search']) ? trim($_GET['search']) : "";
     </table>
 </div>
 
-<?php include '../templates/footer.php'; ?>
+<?php include '../../templates/footer.php'; ?>

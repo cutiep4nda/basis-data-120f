@@ -1,6 +1,6 @@
 <?php
 
-require '../function.php';
+require '../../function.php';
 
 $id = $_GET['id'];
 

@@ -47,6 +47,7 @@ CREATE TABLE tempat_umum(
     CONSTRAINT tu_id_fk FOREIGN KEY(id_tempat) REFERENCES tempat(id)
 );
 
+
 CREATE TABLE tempat_panti(
     id_tempat int not null,
     nama_panti varchar(100) not null,
@@ -76,11 +77,6 @@ CREATE TABLE event_eksternal(
     CONSTRAINT ee_id_pk PRIMARY KEY(id_event),
     CONSTRAINT ee_id_fk FOREIGN KEY(id_event) REFERENCES event(id)
 );
-
-ALTER TABLE event
-ADD CONSTRAINT ev_id_tempat_fk
-FOREIGN KEY(id_tempat) REFERENCES tempat(id);
-
 
 -- tabel partisipasi
 CREATE TABLE partisipasi(
@@ -124,3 +120,75 @@ CREATE TABLE donasi_barang(
     CONSTRAINT db_id_pk PRIMARY KEY(id_donasi),
     CONSTRAINT db_id_fk FOREIGN KEY(id_donasi) REFERENCES donasi(id)
 );
+
+
+ALTER TABLE event_internal
+ADD COLUMN tanggal date;
+
+ALTER TABLE tempat_panti
+DROP CONSTRAINT tp_id_nama_pk;
+
+ALTER TABLE tempat_panti
+ADD CONSTRAINT tp_id_pk PRIMARY KEY(id_tempat);
+
+ALTER TABLE tempat_umum
+DROP CONSTRAINT tu_id_ru_pk;
+
+ALTER TABLE tempat_umum
+ADD CONSTRAINT tu_id_pk PRIMARY KEY(id_tempat);
+
+ALTER TABLE event
+ADD COLUMN nama_event VARCHAR(255);
+
+-- select * from tempat;
+
+-- delete from tempat;
+
+
+ALTER TABLE tempat_umum
+DROP CONSTRAINT tu_id_fk;
+ALTER TABLE tempat_umum
+add CONSTRAINT tu_id_fk FOREIGN KEY(id_tempat) REFERENCES tempat(id) ON DELETE CASCADE;
+
+ALTER TABLE tempat_panti
+DROP CONSTRAINT tp_id_fk;
+ALTER TABLE tempat_panti
+add CONSTRAINT tp_id_fk FOREIGN KEY(id_tempat) REFERENCES tempat(id) ON DELETE CASCADE;
+
+ALTER TABLE event_internal
+DROP CONSTRAINT ei_id_fk;
+ALTER TABLE event_internal
+ADD CONSTRAINT ei_id_fk FOREIGN KEY(id_event) REFERENCES event(id) ON DELETE CASCADE;
+
+ALTER TABLE event_eksternal
+DROP CONSTRAINT ee_id_fk;
+ALTER TABLE event_eksternal
+ADD CONSTRAINT ee_id_fk FOREIGN KEY(id_event) REFERENCES event(id) ON DELETE CASCADE;
+
+
+-- Project Event
+-- Public Relations
+-- human Capital and General Affair
+-- Fundraising
+-- Media Creative
+-- Badan Pengawas Harian
+
+INSERT INTO divisi (di_name)
+VALUES
+    ('Project Event'),
+    ('Public Relations'),
+    ('Human Capital and General Affair'),
+    ('Fundraising'),
+    ('Media Creative'),
+    ('Badan Pengawas Harian');
+
+INSERT INTO cabang (cabang)
+VALUES ('Bogor'), ('Bandung'), ('Jakarta');
+
+ALTER TABLE event
+ADD CONSTRAINT ev_id_tempat_fk
+FOREIGN KEY(id_tempat) REFERENCES tempat(id);
+
+ALTER TABLE event_eksternal
+ADD CONSTRAINT cek_tgl
+check (tanggal_mulai < tanggal_selesai);

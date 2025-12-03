@@ -1,8 +1,8 @@
 <?php
 
-require '../config/db.php';
-include '../templates/header.php';
-include '../templates/sidebar.php';
+require '../../config/db.php';
+include '../../templates/header.php';
+include '../../templates/sidebar.php';
 ?>
 
 <div class="container mt-4">
@@ -86,4 +86,4 @@ include '../templates/sidebar.php';
 </div>
 
 
-<?php include '../templates/footer.php'; ?>
+<?php include '../../templates/footer.php'; ?>

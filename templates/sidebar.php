@@ -133,7 +133,7 @@ $root_dir = "/p4";
             </li>
 
             <li class="nav-item">
-                <a href="<?= $root_dir ?>/pages/donatur-list.php"
+                <a href="<?= $root_dir ?>/pages/donatur/donatur-list.php"
                     class="nav-link <?= ($current_page == 'donatur-list.php') ? 'active' : '' ?>">
                     <iconify-icon icon="mdi:account-heart"></iconify-icon>
                     Data Donatur
@@ -141,7 +141,7 @@ $root_dir = "/p4";
             </li>
 
             <li class="nav-item">
-                <a href="<?= $root_dir ?>/pages/donasi-list.php"
+                <a href="<?= $root_dir ?>/pages/donasi/donasi-list.php"
                     class="nav-link <?= ($current_page == 'donasi-list.php') ? 'active' : '' ?>">
                     <iconify-icon icon="mdi:hand-coin"></iconify-icon>
                     Data Donasi
@@ -149,7 +149,7 @@ $root_dir = "/p4";
             </li>
 
             <li class="nav-item">
-                <a href="<?= $root_dir ?>/pages/staff-list.php"
+                <a href="<?= $root_dir ?>/pages/staff/staff-list.php"
                     class="nav-link <?= ($current_page == 'staff-list.php') ? 'active' : '' ?>">
                     <iconify-icon icon="mdi:account-tie-hat"></iconify-icon>
                     Data Staff
@@ -157,7 +157,7 @@ $root_dir = "/p4";
             </li>
 
             <li class="nav-item">
-                <a href="<?= $root_dir ?>/pages/event-list.php"
+                <a href="<?= $root_dir ?>/pages/event/event-list.php"
                     class="nav-link <?= ($current_page == 'event-list.php') ? 'active' : '' ?>">
                     <iconify-icon icon="mdi:calendar-heart"></iconify-icon>
                     Data Event

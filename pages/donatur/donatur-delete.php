@@ -1,6 +1,6 @@
 <?php
 
-require '../config/db.php';
+require '../../config/db.php';
 
 $id = $_GET['id'];
 
