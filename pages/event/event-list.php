@@ -16,7 +16,7 @@ if (isset($_GET['search'])) {
 $sql = "
     SELECT 
         e.id,
-        e.tema_event,
+        e.nama_event,
         c.cabang AS nama_cabang
     FROM event e
     LEFT JOIN tempat t ON e.id_tempat = t.id
@@ -51,19 +51,19 @@ $query = pg_query($koneksi, $sql);
     </a>
 
     <!-- SEARCH BAR -->
-    <form method="GET" class="mb-3">
+    <!-- <form method="GET" class="mb-3">
         <div class="input-group">
             <input type="text" name="search" placeholder="Cari tema event atau cabang..." value="<?= $keyword ?>"
                 class="form-control">
             <button class="btn btn-dark" type="submit">Cari</button>
         </div>
-    </form>
+    </form> -->
 
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>
                 <th>No</th>
-                <th>Tema Event</th>
+                <th>Nama Event</th>
                 <th>Cabang</th>
                 <th>Aksi</th>
             </tr>
@@ -76,7 +76,7 @@ $query = pg_query($koneksi, $sql);
                 ?>
                 <tr>
                     <td><?= $no++ ?></td>
-                    <td><?= $row['tema_event'] ?></td>
+                    <td><?= $row['nama_event'] ?></td>
 
                     <!-- jika event belum ada daftar staff → cabang = '-' -->
                     <td><?= $row['nama_cabang'] ?: '-' ?></td>

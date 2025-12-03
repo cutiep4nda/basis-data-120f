@@ -123,7 +123,7 @@ CREATE TABLE donasi_barang(
 
 
 ALTER TABLE event_internal
-ADD COLUMN tanggal date;
+ADD COLUMN tanggal date NOT NULL;
 
 ALTER TABLE tempat_panti
 DROP CONSTRAINT tp_id_nama_pk;
@@ -138,7 +138,7 @@ ALTER TABLE tempat_umum
 ADD CONSTRAINT tu_id_pk PRIMARY KEY(id_tempat);
 
 ALTER TABLE event
-ADD COLUMN nama_event VARCHAR(255);
+ADD COLUMN nama_event VARCHAR(255) not null;
 
 -- select * from tempat;
 
@@ -192,3 +192,59 @@ FOREIGN KEY(id_tempat) REFERENCES tempat(id);
 ALTER TABLE event_eksternal
 ADD CONSTRAINT cek_tgl
 check (tanggal_mulai < tanggal_selesai);
+
+-- select * from partisipasi;
+
+ALTER TABLE tempat_panti
+ALTER COLUMN jml_anak SET DEFAULT 1,
+ALTER COLUMN min_usia SET DEFAULT 1,
+ALTER COLUMN max_usia SET DEFAULT 1,
+ALTER COLUMN min_pendidikan SET DEFAULT 'BELUM SEKOLAH',
+ALTER COLUMN max_pendidikan SET DEFAULT 'BELUM SEKOLAH';
+
+ALTER TABLE tempat_panti
+ALTER COLUMN nama_panti TYPE VARCHAR(100),
+alter column nama_panti set not null;
+
+
+alter table tempat_panti
+alter column max_pendidikan TYPE VARCHAR(15),
+alter column max_pendidikan SET DEFAULT 'BELUM SEKOLAH',
+alter column min_pendidikan TYPE VARCHAR(15),
+alter column min_pendidikan SET DEFAULT 'BELUM SEKOLAH';
+
+rollback;
+
+
+SELECT * FROM pg_stat_activity;
+
+BEGIN;
+INSERT INTO event (id_tempat, tema_event, nama_event)
+VALUES (8, 'Contoh Event', 'Contoh Event');
+ROLLBACK;
+
+
+select * from tempat_panti;
+
+
+
+SELECT table_schema, table_name, column_name, data_type, character_maximum_length
+FROM information_schema.columns
+WHERE character_maximum_length = 10
+  AND table_schema = 'public'
+ORDER BY table_name, column_name;
+
+select * from tempat;
+
+ALTER TABLE tempat_panti
+ADD CONSTRAINT tp_min_cek 
+CHECK (min_pendidikan IN ('BELUM SEKOLAH', 'PAUD', 'SD', 'SMP', 'SMA', 'KULIAH'));
+
+ALTER TABLE tempat_panti
+ADD CONSTRAINT tp_max_cek 
+CHECK (max_pendidikan IN ('BELUM SEKOLAH', 'PAUD', 'SD', 'SMP', 'SMA', 'KULIAH'));
+
+
+alter table tempat_panti drop CONSTRAINT tp_min_cek, drop CONSTRAINT tp_max_cek;
+
+alter table tempat_panti drop constraint tempat_panti_max_pendidikan_check, drop CONSTRAINT tempat_panti_min_pendidikan_check;

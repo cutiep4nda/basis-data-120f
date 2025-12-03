@@ -11,11 +11,11 @@ $search = isset($_GET['search']) ? trim($_GET['search']) : "";
     <h3>Daftar Staff</h3>
 
     <!-- FORM SEARCH -->
-    <form method="GET" class="mb-3 d-flex" style="max-width: 400px;">
+    <!-- <form method="GET" class="mb-3 d-flex" style="max-width: 400px;">
         <input type="text" name="search" class="form-control me-2" placeholder="Cari nama, instansi, MBTI..."
             value="<?= htmlspecialchars($search); ?>">
         <button class="btn btn-primary"><i class="bi bi-search"></i></button>
-    </form>
+    </form> -->
 
     <a href="staff-add.php" class="btn btn-success mb-3">
         <i class="bi bi-plus-circle"></i> Tambah Staff
@@ -76,6 +76,7 @@ $search = isset($_GET['search']) ? trim($_GET['search']) : "";
                     <td><?= $row['divisi']; ?></td>
 
                     <td>
+                        <a href="staff-detail.php?id=<?= $row['id'] ?>" class="btn btn-info btn-sm">Detail</a>
                         <a href="staff-edit.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
 
                         <a href="staff-delete.php?id=<?= $row['id']; ?>"
