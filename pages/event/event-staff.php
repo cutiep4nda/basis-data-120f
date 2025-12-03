@@ -1,7 +1,7 @@
 <?php
-require '../function.php';
-include '../templates/header.php';
-include '../templates/sidebar.php';
+require '../../config/db.php';
+include '../../templates/header.php';
+include '../../templates/sidebar.php';
 
 // Pastikan parameter id_event ada
 if (!isset($_GET['id'])) {
@@ -88,4 +88,4 @@ if (isset($_POST['submit'])) {
 
 </div>
 
-<?php include '../templates/footer.php'; ?>
+<?php include '../../templates/footer.php'; ?>

@@ -1,8 +1,8 @@
 <?php
 
-require '../config/db.php';
-include '../templates/header.php';
-include '../templates/sidebar.php';
+require '../../config/db.php';
+include '../../templates/header.php';
+include '../../templates/sidebar.php';
 
 $success = "";
 $error = "";
@@ -136,4 +136,4 @@ if (isset($_POST['submit'])) {
     });
 </script>
 
-<?php include '../templates/footer.php'; ?>
+<?php include '../../templates/footer.php'; ?>

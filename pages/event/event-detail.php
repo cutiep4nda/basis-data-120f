@@ -1,8 +1,8 @@
 <?php
 
-require '../function.php';
-include '../templates/header.php';
-include '../templates/sidebar.php';
+require '../../config/db.php';
+include '../../templates/header.php';
+include '../../templates/sidebar.php';
 
 $id = $_GET['id'];
 
@@ -81,4 +81,4 @@ $staff = pg_query_params(
     <a href="event-list.php" class="btn btn-secondary mt-2">Kembali</a>
 </div>
 
-<?php include '../templates/footer.php'; ?>
+<?php include '../../templates/footer.php'; ?>

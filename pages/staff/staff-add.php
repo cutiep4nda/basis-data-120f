@@ -1,8 +1,8 @@
 <?php
 
-require '../function.php';
-include '../templates/header.php';
-include '../templates/sidebar.php';
+require '../../config/db.php';
+include '../../templates/header.php';
+include '../../templates/sidebar.php';
 
 $success = "";
 $error = "";
@@ -12,6 +12,9 @@ $cabangQuery = pg_query($koneksi, "SELECT * FROM cabang ORDER BY cabang ASC");
 $divisiQuery = pg_query($koneksi, "SELECT * FROM divisi ORDER BY di_name ASC");
 
 if (isset($_POST['submit'])) {
+
+    // print_r($_POST);
+    // exit;
 
     $nama = $_POST['nama'];
     $tempat_lahir = $_POST['tempat_lahir'];
@@ -76,7 +79,33 @@ if (isset($_POST['submit'])) {
 
         <div class="mb-3">
             <label class="form-label">MBTI</label>
-            <input type="text" name="mbti" class="form-control" placeholder="Contoh: INFP, ESTJ" required>
+            <select name="mbti" class="form-control" required>
+                <option value="">-- pilih MBTI --</option>
+
+                <!-- Analysts -->
+                <option value="INTJ">INTJ – The Architect</option>
+                <option value="INTP">INTP – The Logician</option>
+                <option value="ENTJ">ENTJ – The Commander</option>
+                <option value="ENTP">ENTP – The Debater</option>
+
+                <!-- Diplomats -->
+                <option value="INFJ">INFJ – The Advocate</option>
+                <option value="INFP">INFP – The Mediator</option>
+                <option value="ENFJ">ENFJ – The Protagonist</option>
+                <option value="ENFP">ENFP – The Campaigner</option>
+
+                <!-- Sentinels -->
+                <option value="ISTJ">ISTJ – The Logistician</option>
+                <option value="ISFJ">ISFJ – The Defender</option>
+                <option value="ESTJ">ESTJ – The Executive</option>
+                <option value="ESFJ">ESFJ – The Consul</option>
+
+                <!-- Explorers -->
+                <option value="ISTP">ISTP – The Virtuoso</option>
+                <option value="ISFP">ISFP – The Adventurer</option>
+                <option value="ESTP">ESTP – The Entrepreneur</option>
+                <option value="ESFP">ESFP – The Entertainer</option>
+            </select>
         </div>
 
         <div class="mb-3">
@@ -111,4 +140,4 @@ if (isset($_POST['submit'])) {
 
 </div>
 
-<?php include '../templates/footer.php'; ?>
+<?php include '../../templates/footer.php'; ?>

@@ -1,8 +1,8 @@
 <?php
 
-require '../config/db.php';
-include '../templates/header.php';
-include '../templates/sidebar.php';
+require '../../config/db.php';
+include '../../templates/header.php';
+include '../../templates/sidebar.php';
 
 $id = $_GET['id'];
 
