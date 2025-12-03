@@ -9,14 +9,19 @@ $error = "";
 
 if (isset($_POST['submit'])) {
 
+    //print_r($_POST);
+    //exit;
+
     $nama_event = $_POST['nama_event'];
     $jenis_event = $_POST['jenis_event'];
-    $tema = $_POST['deskripsi']; // textarea tema
+    $tema = $_POST['deskripsi'];
     $id_tempat = $_POST['id_tempat'];
 
     pg_query($koneksi, "BEGIN");
+
     // =============== HANDLE TAMBAH TEMPAT BARU ===============
     if ($id_tempat == "baru") {
+
         $jenis_tempat = $_POST['jenis_tempat'];
         $nama_tempat = $_POST['nama_tempat'];
 
@@ -26,12 +31,16 @@ if (isset($_POST['submit'])) {
         $id_tempat = $new_tempat['id'];
 
         if ($jenis_tempat == "panti") {
+
+            // HANYA nama_panti yang diisi → kolom lain follow DEFAULT
             pg_query_params(
                 $koneksi,
                 "INSERT INTO tempat_panti (id_tempat, nama_panti) VALUES ($1, $2)",
                 [$id_tempat, $nama_tempat]
             );
-        } else {
+
+        } else { // Tempat umum
+
             pg_query_params(
                 $koneksi,
                 "INSERT INTO tempat_umum (id_tempat, ruang) VALUES ($1, $2)",
@@ -62,7 +71,6 @@ if (isset($_POST['submit'])) {
         if ($jenis_event == "internal") {
 
             $tanggal = $_POST['tanggal'];
-
             $query_internal = "INSERT INTO event_internal (id_event, tanggal)
                                VALUES ($1, $2)";
             $ress = pg_query_params($koneksi, $query_internal, [$id_event, $tanggal]);
@@ -82,12 +90,13 @@ if (isset($_POST['submit'])) {
                 $deskripsi_tambahan
             ]);
         }
+
         if ($ress) {
             pg_query($koneksi, "COMMIT");
             $success = "Event berhasil ditambahkan!";
         } else {
             pg_query($koneksi, "ROLLBACK");
-            $error = "Event gagal ditambahkan";
+            $error = "Event gagal ditambahkan!";
         }
     }
 }
@@ -130,14 +139,14 @@ if (isset($_POST['submit'])) {
                 <?php
                 // Ambil tempat panti
                 $tp = pg_query($koneksi, "SELECT t.id, p.nama_panti AS nama FROM tempat t 
-                                  JOIN tempat_panti p ON t.id = p.id_tempat ORDER BY nama ASC");
+                    JOIN tempat_panti p ON t.id = p.id_tempat ORDER BY nama ASC");
                 while ($row = pg_fetch_assoc($tp)) {
                     echo '<option value="' . $row['id'] . '">' . $row['nama'] . ' (Panti)</option>';
                 }
 
                 // Ambil tempat umum
                 $tu = pg_query($koneksi, "SELECT t.id, u.ruang AS nama FROM tempat t 
-                                  JOIN tempat_umum u ON t.id = u.id_tempat ORDER BY nama ASC");
+                    JOIN tempat_umum u ON t.id = u.id_tempat ORDER BY nama ASC");
                 while ($row = pg_fetch_assoc($tu)) {
                     echo '<option value="' . $row['id'] . '">' . $row['nama'] . ' (Umum)</option>';
                 }
@@ -160,21 +169,26 @@ if (isset($_POST['submit'])) {
             </div>
 
             <div class="mb-3">
-                <label>Nama / Ruang Tempat</label>
-                <input type="text" name="nama_tempat" class="form-control">
+                <label id="label_nama_tempat">Nama Panti</label>
+                <input type="text" name="nama_tempat" class="form-control" required>
             </div>
         </div>
 
         <script>
             document.getElementById("id_tempat").addEventListener("change", function () {
-                if (this.value === "baru") {
-                    document.getElementById("form_tempat_baru").style.display = "block";
-                } else {
-                    document.getElementById("form_tempat_baru").style.display = "none";
-                }
+                document.getElementById("form_tempat_baru").style.display =
+                    this.value === "baru" ? "block" : "none";
+            });
+
+            document.getElementById("jenis_tempat").addEventListener("change", function () {
+                const label = document.getElementById("label_nama_tempat");
+                label.innerText = this.value === "panti"
+                    ? "Nama Panti"
+                    : "Ruang / Nama Tempat";
             });
         </script>
 
+        <!-- FORM DETAIL EVENT -->
         <div id="form_eksternal" style="display:none;">
             <div class="mb-3">
                 <label class="form-label">Tanggal Mulai</label>
@@ -194,7 +208,7 @@ if (isset($_POST['submit'])) {
 
         <div id="form_internal" style="display:none;">
             <div class="mb-3">
-                <label class="form-label">Tanggal Mulai</label>
+                <label class="form-label">Tanggal</label>
                 <input type="date" name="tanggal" class="form-control">
             </div>
         </div>
@@ -205,8 +219,8 @@ if (isset($_POST['submit'])) {
                     document.getElementById("form_eksternal").style.display = "block";
                     document.getElementById("form_internal").style.display = "none";
                 } else {
-                    document.getElementById("form_eksternal").style.display = "none";
                     document.getElementById("form_internal").style.display = "block";
+                    document.getElementById("form_eksternal").style.display = "none";
                 }
             });
         </script>
